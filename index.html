@@ -4,202 +4,247 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Sebastian Sjøen-Tollaksvik — CV</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   :root {
-    --navy: #0d2438;
-    --navy-light: #17324a;
-    --bg: #faf9f6;
-    --line: #dcd8cf;
-    --text: #1a1a1a;
-    --muted: #6b6b6b;
+    --navy: #14273e;
+    --navy-2: #1d3a5c;
+    --ink: #17191c;
+    --muted: #5a6570;
+    --paper: #ffffff;
+    --line: #17191c;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body {
-    background: var(--bg);
-    color: var(--text);
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Poppins', -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    -webkit-font-smoothing: antialiased;
   }
 
-  header {
+  /* ===== Card header, mirrors the printed business card ===== */
+  .card {
     position: relative;
-    background: var(--navy);
-    color: white;
-    padding: 40px 24px 90px;
-    overflow: hidden;
-  }
-  header .stripes {
-    position: absolute;
-    top: -40px;
-    right: -60px;
-    width: 220px;
-    height: 260px;
-    background: repeating-linear-gradient(
-      -35deg,
-      transparent 0 10px,
-      rgba(255,255,255,0.06) 10px 12px
-    );
-  }
-  header .content {
-    position: relative;
-    max-width: 760px;
+    max-width: 900px;
     margin: 0 auto;
+    padding: 48px 40px 40px;
+    overflow: hidden;
+    border-bottom: 1px solid #eceae4;
   }
+
+  /* diagonal navy band, same motif as the printed card */
+  .band {
+    position: absolute;
+    top: -20%;
+    right: 8%;
+    width: 130px;
+    height: 160%;
+    background: var(--navy);
+    transform: rotate(28deg);
+    z-index: 0;
+  }
+  .band::before {
+    content: "";
+    position: absolute;
+    top: 0; left: -46px; bottom: 0;
+    width: 40px;
+    background-image: repeating-linear-gradient(
+      to right, #c9ccd1 0 2px, transparent 2px 9px
+    );
+    opacity: 0.6;
+  }
+
+  .card-inner {
+    position: relative;
+    z-index: 1;
+    max-width: 480px;
+  }
+
   .logo-row {
     display: flex;
     align-items: center;
-    gap: 14px;
+    gap: 12px;
     margin-bottom: 28px;
   }
-  .logo-circle {
-    width: 44px;
-    height: 44px;
+  .logo-ring {
+    width: 46px;
+    height: 46px;
     border-radius: 50%;
-    border: 1.5px solid rgba(255,255,255,0.6);
+    border: 1.5px solid var(--navy);
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 0.6rem;
-    letter-spacing: 0.5px;
-    text-align: center;
-    flex-shrink: 0;
     overflow: hidden;
+    flex-shrink: 0;
   }
-  .logo-circle img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-  }
+  .logo-ring img { width: 100%; height: 100%; object-fit: contain; }
   .org-name {
-    font-size: 0.8rem;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    color: rgba(255,255,255,0.75);
-  }
-  h1 {
-    font-size: 1.9rem;
+    font-size: 0.72rem;
     font-weight: 600;
-    letter-spacing: -0.01em;
-  }
-  p.role {
-    margin-top: 6px;
-    color: rgba(255,255,255,0.7);
-    font-size: 1rem;
-  }
-  .contact-row {
-    margin-top: 20px;
-    display: flex;
-    gap: 24px;
-    flex-wrap: wrap;
-    font-size: 0.9rem;
-    color: rgba(255,255,255,0.85);
+    letter-spacing: 1.4px;
+    text-transform: uppercase;
+    color: var(--navy);
   }
 
-  main {
-    flex: 1;
-    max-width: 760px;
-    width: 100%;
-    margin: -50px auto 0;
-    padding: 0 24px 48px;
+  h1 {
+    font-size: 2rem;
+    font-weight: 500;
+    color: var(--navy);
+    letter-spacing: -0.01em;
+    margin-bottom: 14px;
   }
-  .panel {
-    background: white;
-    border-radius: 10px;
-    box-shadow: 0 6px 24px rgba(13,36,56,0.10);
-    overflow: hidden;
+
+  .rule {
+    width: 90px;
+    height: 4px;
+    background: var(--ink);
+    margin-bottom: 18px;
   }
-  .tabs {
+
+  .info-list { display: flex; flex-direction: column; gap: 10px; }
+  .info-row {
     display: flex;
-    border-bottom: 1px solid var(--line);
+    align-items: center;
+    gap: 12px;
+    font-size: 0.96rem;
+    color: var(--ink);
   }
-  .tab {
-    flex: 1;
-    padding: 16px 12px;
-    text-align: center;
-    cursor: pointer;
+  .info-row svg { flex-shrink: 0; stroke: var(--navy); }
+
+  /* ===== Language switch + viewer ===== */
+  main {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 40px 40px 56px;
+  }
+
+  .switch {
+    display: inline-flex;
+    border: 1.5px solid var(--navy);
+    border-radius: 999px;
+    padding: 3px;
+    margin-bottom: 24px;
+  }
+  .switch button {
     border: none;
     background: none;
-    font-size: 0.95rem;
+    padding: 9px 24px;
+    font-family: inherit;
+    font-size: 0.88rem;
     font-weight: 600;
-    color: var(--muted);
     letter-spacing: 0.3px;
-    border-bottom: 2px solid transparent;
-    transition: color 0.15s ease, border-color 0.15s ease;
-  }
-  .tab.active {
     color: var(--navy);
-    border-bottom: 2px solid var(--navy);
+    border-radius: 999px;
+    cursor: pointer;
+    transition: background 0.15s ease, color 0.15s ease;
   }
-  iframe {
+  .switch button.active {
+    background: var(--navy);
+    color: white;
+  }
+
+  .viewer {
+    border: 1px solid #e3e1da;
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .viewer iframe {
     width: 100%;
-    height: 72vh;
+    height: 78vh;
     border: none;
     display: block;
+    background: #fafaf8;
   }
-  .download-row {
+  .viewer-footer {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 14px 20px;
-    border-top: 1px solid var(--line);
+    padding: 12px 18px;
+    border-top: 1px solid #e3e1da;
     background: #fafaf8;
   }
-  .download-row span {
-    font-size: 0.8rem;
+  .viewer-footer span {
+    font-size: 0.78rem;
     color: var(--muted);
   }
-  .download-row a {
+  .viewer-footer a {
+    font-size: 0.85rem;
+    font-weight: 600;
     color: var(--navy);
     text-decoration: none;
-    font-size: 0.9rem;
-    font-weight: 600;
   }
-  .download-row a:hover { text-decoration: underline; }
+  .viewer-footer a:hover { text-decoration: underline; }
+
+  #fallback-msg {
+    display: none;
+    padding: 40px 18px;
+    text-align: center;
+    color: var(--muted);
+    font-size: 0.9rem;
+  }
 
   footer {
     text-align: center;
     padding: 24px;
-    font-size: 0.75rem;
-    letter-spacing: 1px;
+    font-size: 0.72rem;
+    letter-spacing: 1.6px;
     text-transform: uppercase;
     color: var(--muted);
   }
 
-  @media (max-width: 480px) {
-    header { padding: 32px 18px 80px; }
+  @media (max-width: 600px) {
+    .card { padding: 36px 22px 32px; }
+    main { padding: 28px 22px 40px; }
     h1 { font-size: 1.5rem; }
-    iframe { height: 65vh; }
+    .band { right: -2%; width: 90px; }
+    .viewer iframe { height: 65vh; }
   }
 </style>
 </head>
 <body>
 
-<header>
-  <div class="stripes"></div>
-  <div class="content">
+<section class="card">
+  <div class="band"></div>
+  <div class="card-inner">
     <div class="logo-row">
-      <div class="logo-circle"><img src="logo.png" alt="" onerror="this.parentElement.textContent='LOGO'"></div>
-      <div class="org-name">Norges Arktiske Universitet</div>
+      <div class="logo-ring">
+        <img src="logo.png" alt="" onerror="this.parentElement.style.display='none'">
+      </div>
+      <div class="org-name">Norges Arktiske&nbsp;Universitet</div>
     </div>
+
     <h1>Sebastian Sjøen-Tollaksvik</h1>
-    <p class="role">Masterstudent, sivilingeniør KI</p>
-    <div class="contact-row">
-      <span>+47 404 80 782</span>
-      <span>sesjo8217@uit.no</span>
+    <div class="rule"></div>
+
+    <div class="info-list">
+      <div class="info-row">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        <span>+47 404 80 782</span>
+      </div>
+      <div class="info-row">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg>
+        <span>sesjo8217@uit.no</span>
+      </div>
+      <div class="info-row">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10 12 5 2 10l10 5 10-5Z"/><path d="M6 12v5c0 1.66 2.69 3 6 3s6-1.34 6-3v-5"/></svg>
+        <span>Masterstudent, sivilingeniør KI</span>
+      </div>
     </div>
   </div>
-</header>
+</section>
 
 <main>
-  <div class="panel">
-    <div class="tabs">
-      <button class="tab active" onclick="showCV('no')">Norsk CV</button>
-      <button class="tab" onclick="showCV('en')">English CV</button>
-    </div>
-    <iframe id="cv-frame" src="cv-no.pdf"></iframe>
-    <div class="download-row">
+  <div class="switch" role="tablist" aria-label="Velg CV-språk">
+    <button type="button" class="active" id="tab-no">Norsk</button>
+    <button type="button" id="tab-en">English</button>
+  </div>
+
+  <div class="viewer">
+    <iframe id="cv-frame" src="cv-no.pdf" title="CV"></iframe>
+    <div id="fallback-msg">PDF-en kunne ikke lastes. Prøv nedlastingslenken under.</div>
+    <div class="viewer-footer">
       <span>Vises ikke riktig på mobil?</span>
       <a id="cv-download" href="cv-no.pdf" download>Last ned PDF</a>
     </div>
@@ -209,25 +254,24 @@
 <footer>UiT · Norges Arktiske Universitet</footer>
 
 <script>
-  function showCV(lang) {
-    const frame = document.getElementById('cv-frame');
-    const download = document.getElementById('cv-download');
-    const tabs = document.querySelectorAll('.tab');
+  const tabNo = document.getElementById('tab-no');
+  const tabEn = document.getElementById('tab-en');
+  const frame = document.getElementById('cv-frame');
+  const download = document.getElementById('cv-download');
 
-    if (lang === 'no') {
-      frame.src = 'cv-no.pdf';
-      download.href = 'cv-no.pdf';
-      download.textContent = 'Last ned PDF';
-      tabs[0].classList.add('active');
-      tabs[1].classList.remove('active');
-    } else {
-      frame.src = 'cv-en.pdf';
-      download.href = 'cv-en.pdf';
-      download.textContent = 'Download PDF';
-      tabs[1].classList.add('active');
-      tabs[0].classList.remove('active');
-    }
+  const files = { no: 'cv-no.pdf', en: 'cv-en.pdf' };
+  const labels = { no: 'Last ned PDF', en: 'Download PDF' };
+
+  function setLang(lang) {
+    frame.src = files[lang];
+    download.href = files[lang];
+    download.textContent = labels[lang];
+    tabNo.classList.toggle('active', lang === 'no');
+    tabEn.classList.toggle('active', lang === 'en');
   }
+
+  tabNo.addEventListener('click', () => setLang('no'));
+  tabEn.addEventListener('click', () => setLang('en'));
 </script>
 
 </body>
