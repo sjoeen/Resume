@@ -172,7 +172,7 @@
     </div>
 
     <div class="viewer">
-      <iframe id="cv-frame" src="cv-no.pdf" title="Dokument"></iframe>
+      <iframe id="cv-frame" src="" title="Dokument"></iframe>
       <div class="viewer-footer">
         <span>Vises ikke riktig på mobil?</span>
         <a id="cv-download" href="cv-no.pdf" download>Last ned PDF</a>
@@ -193,14 +193,20 @@
   const files = { no: 'cv-no.pdf', en: 'cv-en.pdf', ref: 'anbefaling.pdf' };
   const labels = { no: 'Last ned PDF', en: 'Download PDF', ref: 'Last ned anbefalingsbrev' };
 
+  function viewerUrl(file) {
+    const absolute = new URL(file, window.location.href).href;
+    return 'https://docs.google.com/viewer?embedded=true&url=' + encodeURIComponent(absolute);
+  }
+
   function setDoc(key) {
-    frame.src = files[key];
+    frame.src = viewerUrl(files[key]);
     download.href = files[key];
     download.textContent = labels[key];
     Object.entries(tabs).forEach(([k, el]) => el.classList.toggle('active', k === key));
   }
 
   Object.entries(tabs).forEach(([key, el]) => el.addEventListener('click', () => setDoc(key)));
+  setDoc('no');
 </script>
 
 </body>
